@@ -55,3 +55,11 @@ class SnippetSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'tags': {'required': True}  # set required=True to ensure tags are always provided
         }
+
+
+class SnippetCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Snippet
+        fields = ['id', 'title', 'content', 'tag']
+    

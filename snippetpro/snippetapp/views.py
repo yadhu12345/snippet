@@ -39,12 +39,14 @@ class RefreshAPIView(APIView):
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class SnippetCreateView(CreateAPIView):
-    serializer_class = SnippetSerializer
-    permission_classes = (IsAuthenticated,)
+    def post(self, request):
+        serializer = SnippetCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
 
-    def perform_create(self, serializer):
-        print(self.request.user)
-        serializer.save(user=self.request.user)
 
 class DeleteSnippet(APIView):
     def get(self,request,id):
