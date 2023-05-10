@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import *
+from snippetapp import views as api_views
 
 urlpatterns = [
     path('api/login/', LoginAPIView.as_view(), name='login'),
@@ -9,5 +10,5 @@ urlpatterns = [
     path('snippets/<int:pk>/', SnippetDetail.as_view(), name='detail'),
     path('taglist/', TagList.as_view(), name='taglist'),
     path('tagdetails/', TagDetails.as_view(), name='tagdetails'),
-    path('deletesnippet/<int:id>/', DeleteSnippet.as_view(), name='delete'),
+    path('deletesnippet/<int:id>/', api_views.DeleteSnippet.as_view(), name='delete'),
 ]

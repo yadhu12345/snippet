@@ -47,9 +47,18 @@ class SnippetCreateView(CreateAPIView):
         serializer.save(user=self.request.user)
 
 class DeleteSnippet(APIView):
-    def delete(self,request):
+    def get(self,request,id):
+        if id is not None:
+            question1      = Snippet.objects.get(id=id)
+            serializer     = VSnippetSerializer(question1)
+            return Response(serializer.data) 
+        question1      = Snippet.objects.all()       
+        serializer     = VSnippetSerializer(question1,many=True)
+        return Response(serializer.data)
+    def delete(self,req,id):
+
         Snippet.objects.get(id=id).delete()
-        return Response({"msg":1})
+        return Response({"msg":1}) 
         
 class SnippetList(generics.ListAPIView):
     queryset = Snippet.objects.all()

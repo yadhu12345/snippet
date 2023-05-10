@@ -12,6 +12,13 @@ class LSnippetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Snippet
         fields = '__all__'
+
+class VSnippetSerializer(serializers.ModelSerializer):
+    
+
+    class Meta:
+        model = Snippet
+        fields = '__all__'
         
 class DSnippetSerializer(serializers.ModelSerializer):
     tag = LTagSerializer()
